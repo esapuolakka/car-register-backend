@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h3 {
+      margin-top: 3rem;
+    }
+    table {
+      border-collapse: collapse;
+      width: 50%;
+      box-shadow: 2px 2px 2px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #b6ffbe;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    <a href="/">Takaisin</a>
+  </p>
+  <h1>Autot</h1>
+  <h3 style="margin-top: 3rem;">Lisää auto</h3>
+  <form th:action="@{/autot}" method="POST">
+    <label for="rekisterinumero">Rekisterinumero:</label><br>
+    <input type="text" id="rekisterinumero" name="rekisterinumero"><br>
+    <label for="merkki">Merkki:</label><br>
+    <input type="text" id="merkki" name="merkki"><br>
+    <label for="malli">Malli:</label><br>
+    <input type="text" id="malli" name="malli"><br>
+    <label for="valmistusvuosi">Valmistusvuosi:</label><br>
+    <input type="text" id="valmistusvuosi" name="valmistusvuosi"><br><br>
+    <input type="submit" value="Lisää auto">
+  </form>
+  <h3 style="margin-top: 3rem;">Autot</h3>
+  <table>
+    <thead>
+      <th>
+        Rekisterinumero
+      </th>
+      <th>
+        Merkki
+      </th>
+      <th>
+        Malli
+      </th>
+      <th>
+        Valmistusvuosi
+      </th>
+      <th>
+      </th>
+      <th>
+      </th>
+      <tbody>
+        <tr th:each="auto : ${autot}">
+          <td th:text="${auto.rekisterinumero}">Rekisterinumero</td>
+          <td th:text="${auto.merkki}">Merkki</td>
+          <td th:text="${auto.malli}">Malli</td>
+          <td th:text="${auto.valmistusvuosi}">Valmistusvuosi</td>
+          <td><a th:href="@{/autot/{id}(id=${auto.id})}">Tiedot</a></td>
+          <td><a th:href="@{/autot/delete/{id}(id=${auto.id})}" style="color: red;">poista</a></td>
+        </tr>
+      </tbody>
+    </thead>
+  </table>
+</body>
+</html>

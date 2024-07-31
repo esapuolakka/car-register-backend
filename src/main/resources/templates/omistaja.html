@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${omistaja.kokonimi}">Omistajan nimi</title>
+  <style>
+    h3 {
+      margin-top: 3rem;
+    }
+    table {
+      border-collapse: collapse;
+      width: 50%;
+      box-shadow: 2px 2px 2px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #b6ffbe;
+    }
+  </style>
+</head>
+<body>
+  <a href="/omistajat">Takaisin</a>
+  <h1 th:text="${omistaja.kokonimi}">Omistajan nimi</h1>
+  <h3>Omistajan autot</h3>
+  <table>
+    <thead>
+      <th>
+        Rekisterinumero
+      </th>
+      <th>
+        Merkki
+      </th>
+      <th>
+        Malli
+      </th>
+      <th>
+        Valmistusvuosi
+      </th>
+    </thead>
+    <tbody>
+      <tr th:each="auto : ${omistaja.autot}">
+        <td th:text="${auto.rekisterinumero}"></td>
+        <td th:text="${auto.merkki}"></td>
+        <td th:text="${auto.malli}"></td>
+        <td th:text="${auto.valmistusvuosi}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Lisää auto omistajalle</h3>
+
+  <form th:action="@{'/omistajat/' + ${omistaja.id} + '/auto'}" method="POST">
+    <select name="autoId">
+      <option th:each="auto : ${autot}"
+              th:text="${auto.autonTiedot}"
+              th:value="${auto.id}">
+        Auton merkki ja malli
+      </option>
+    </select>
+  <input type="submit" value="Lisää auto">
+</form>
+
+</body>
+</html>

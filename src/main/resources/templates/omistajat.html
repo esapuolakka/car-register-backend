@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omistajat</title>
+  <style>
+    h3 {
+      margin-top: 3rem;
+    }
+    table {
+      border-collapse: collapse;
+      width: 50%;
+      box-shadow: 2px 2px 2px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #b6ffbe;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    <a href="/">Takaisin</a>
+  </p>
+  <h1>Omistajat</h1>
+  <h3 style="margin-top: 3rem;">Lisää omistaja</h3>
+  <form th:action="@{/omistajat}" method="POST">
+    <label for="omistajat">Etunimi:</label><br>
+    <input type="text" name="etunimi"><br>
+    <label for="omistajat">Sukunimi</label><br>
+    <input type="text" name="sukunimi"><br><br>
+    <input type="submit" value="Lisää omistaja">
+  </form>
+  <h3 style="margin-top: 3rem;">Omistajat</h3>
+  <table>
+    <thead>
+      <th>
+        Etunimi
+      </th>
+      <th>
+        Sukunimi
+      </th>
+      <th>
+      </th>
+      <th>
+      </th>
+    </thead>
+    <tbody>
+      <tr th:each="omistaja : ${omistajat}">
+        <td th:text="${omistaja.etunimi}"></td>
+        <td th:text="${omistaja.sukunimi}"></td>
+        <td><a th:href="@{/omistajat/{id}(id=${omistaja.id})}">Tiedot</a></td>
+        <td><a th:href="@{/omistajat/delete/{id}(id=${omistaja.id})}" style="color: red;">poista</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
